@@ -451,9 +451,7 @@ const displayRandomizedItems = function () {
         const randMessageHTML = `
             <div class="randomize-message-container">
                 <p class="randomize-message">
-                If you would like to randomize again click on the <strong>Next</strong> button. 
-                <br>
-                You can store new items again if necessary.
+                If you would like to randomize again, insert your new items or keep the ones you have, and then click on the <strong>Next</strong> button.
                 <br><br>
                 <strong>NOTE:</strong> Make sure to screenshot this result before randomizing again because it won't be saved.
                 </p>
