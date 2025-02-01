@@ -363,6 +363,8 @@ body {
         font-size: 1.8rem;
         letter-spacing: 0.2rem;
         overflow-y: scroll;
+        scrollbar-width: thin;
+        scrollbar-color: #686868 transparent;
         
         border-top: none;
         border-bottom: none;
@@ -378,12 +380,32 @@ body {
             opacity: 1;
         }
 
-        // &.expanded {
-        //     height: 160%;
-        //     // transform: translateY(-50%), scaleY(1.5);
-        //     // height: 600px;
-        //     // top: calc(50% - 150px);
-        // }
+        /* * This is to handle Chrome, Edge and Safari  */
+        .randomize-container::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .randomize-container::-webkit-scrollbar-thumb {
+            background-color: #6c757d;
+            border-radius: 4px;
+        }
+
+        .randomize-container::-webkit-scrollbar-thumb:hover {
+            background-color: #495057;
+        }
+
+        .randomize-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .randomize-container::-webkit-scrollbar-track-piece {
+            background: transparent;
+        }
+
+        /* * This is to handle Internet Explorer */
+        .randomize-container {
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
         
         p {
             pointer-events: none;
