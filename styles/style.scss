@@ -24,6 +24,10 @@ $fontType: "Inconsolata", serif;
 html {
     font-size: 62.5%;
     box-sizing: border-box;
+
+    @media screen and (max-width: 1130px) {
+        font-size: 40%;
+    }
 }
 
 
@@ -62,7 +66,7 @@ body {
         padding-top: 0;
 
         flex-direction: column;
-        column-gap: 2vw;
+        row-gap: 2vh;
     }
 }
 
@@ -79,10 +83,11 @@ body {
     // background-color: $testColorTwo;
     border-radius: 10px;
     cursor: default;
-
+    
     @media screen and (max-width: 1130px) {
-        width: 60vw;
+        width: 100vw;
         height: 30vh;
+        background-color: rgb(231, 231, 231);
     }
 
     // * The h1 block is a bit long because of the animation statements
@@ -193,6 +198,8 @@ body {
     @media screen and (max-width: 1130px) {
         width: 60vw;
         height: 50vh;
+
+        border: none;
     }
 
     .starter-container {
@@ -657,25 +664,32 @@ body {
     // border-top: 1px solid rgb(161, 161, 161);
 
     display: flex;
-    justify-content: end;
+    justify-content: center;
     padding: 1rem 1rem 0 1rem;
 
     // background-color: $testColorOne;
 
-    .align-footer-left {
+    .align-footer-center {
         display: flex;
-        width: 55%;
+        width: 100%;
         padding: 0 1rem 1rem 1rem;
         justify-content: space-between;
 
         // background-color: $testColorTwo;
 
+        div {
+            flex: 1;
+        }
+
         .new-randomize-container {
+            display: flex;
+            justify-content: center;
 
             opacity: 0;
             visibility: hidden;
 
             transition: all 0.5s;
+
 
             .new-randomize-button {
                 color: $buttonTextColor;
@@ -711,7 +725,7 @@ body {
         .developer-information-container {
             display: flex;
             flex-direction: column;
-            justify-content: end;
+            justify-content: center;
             align-items: end;
             
             a {
