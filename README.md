@@ -1,4 +1,4 @@
 # Object-Randomizer
-A simple web app that lets a user customize their objects and randomize items
+A minimal website that lets you randomize and connect items.
 
-Link: https://edomiyasgithub.github.io/Object-Randomizer/
+**Link**: [Object Randomizer](https://edomiyasgithub.github.io/Object-Randomizer/)
