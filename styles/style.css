@@ -1,0 +1,585 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  color: black;
+  background-color: white;
+  font-family: "Inconsolata", serif;
+}
+
+.master-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  -moz-column-gap: 2vw;
+       column-gap: 2vw;
+}
+@media screen and (max-width: 1130px) {
+  .master-container {
+    width: 100vw;
+    height: 116%;
+    overflow-y: scroll;
+    justify-content: start;
+    padding-top: 0;
+    flex-direction: column;
+    -moz-column-gap: 2vw;
+         column-gap: 2vw;
+  }
+}
+
+.main-container {
+  width: 34vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  border-radius: 10px;
+  cursor: default;
+}
+@media screen and (max-width: 1130px) {
+  .main-container {
+    width: 60vw;
+    height: 30vh;
+  }
+}
+.main-container h1 {
+  font-size: 8rem;
+  font-weight: 400;
+  line-height: 6.8rem;
+  margin-bottom: 1.5rem;
+  animation: glitch 2s linear infinite;
+}
+@media screen and (max-width: 1130px) {
+  .main-container h1 {
+    text-align: center;
+  }
+}
+@keyframes glitch {
+  2%, 64% {
+    transform: translate(2px, 0) skew(0deg);
+  }
+  4%, 60% {
+    transform: translate(-2px, 0) skew(0deg);
+  }
+  62% {
+    transform: translate(0, 0) skew(5deg);
+  }
+}
+.main-container h1:before, .main-container h1:after {
+  content: attr(title);
+  position: absolute;
+  left: 0;
+}
+@media screen and (max-width: 1130px) {
+  .main-container h1:before, .main-container h1:after {
+    right: 0;
+  }
+}
+.main-container h1:before {
+  animation: glitchTop 2s linear infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+@keyframes glitchTop {
+  2%, 64% {
+    transform: translate(2px, -2px);
+  }
+  4%, 60% {
+    transform: translate(-2px, 2px);
+  }
+  62% {
+    transform: translate(13px, -1px) skew(-13deg);
+  }
+}
+.main-container h1:after {
+  animation: glitchBottom 2.5s linear infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+@keyframes glitchBottom {
+  2%, 64% {
+    transform: translate(-2px, 0);
+  }
+  4%, 60% {
+    transform: translate(-2px, 0);
+  }
+  62% {
+    transform: translate(-22px, 5px) skew(21deg);
+  }
+}
+.main-container p {
+  font-size: 3rem;
+  text-align: left;
+  font-weight: 400;
+}
+@media screen and (max-width: 1130px) {
+  .main-container p {
+    font-size: 2.8rem;
+    text-align: center;
+  }
+}
+
+.operation-container {
+  width: 38vw;
+  height: 50vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 3vh;
+  border: 3px solid black;
+  border-radius: 50px;
+  transition: all 0.5s;
+}
+@media screen and (max-width: 1130px) {
+  .operation-container {
+    width: 60vw;
+    height: 50vh;
+  }
+}
+.operation-container .starter-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.5s ease, visibility 0s 0.5s;
+}
+.operation-container .starter-container.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.operation-container .starter-button {
+  color: white;
+  background-color: black;
+  font-family: "Inconsolata", serif;
+  font-weight: 500;
+  font-size: 2rem;
+  padding: 1rem 1.4rem;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.35s ease, background-color 0.35s, color 0.35s;
+}
+.operation-container .starter-button:hover {
+  color: black;
+  background-color: white;
+}
+.operation-container .starter-button:active {
+  color: white;
+  background-color: black;
+}
+.operation-container .option-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1vh;
+  font-size: 2rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.operation-container .option-container.activated {
+  visibility: visible;
+  opacity: 1;
+}
+.operation-container .option-container.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.operation-container .option-container .or {
+  color: #888888;
+  cursor: default;
+}
+.operation-container .option-container .option {
+  position: relative;
+  padding: 1.4rem 4.2rem;
+  letter-spacing: 0.2rem;
+  cursor: pointer;
+  transition: all 500ms cubic-bezier(0.77, 0, 0.175, 1);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.operation-container .option-container .option:before, .operation-container .option-container .option:after {
+  content: "";
+  position: absolute;
+  transition: inherit;
+  z-index: -5;
+}
+.operation-container .option-container .option:hover {
+  color: white;
+  transition-delay: 0.5s;
+}
+.operation-container .option-container .option:hover:before {
+  transition-delay: 0s;
+}
+.operation-container .option-container .option:hover:after {
+  background-color: black;
+  transition-delay: 0.35s;
+}
+.operation-container .option-container .option:active {
+  font-size: 1.8rem;
+  transition: all 0.5s;
+}
+.operation-container .option-container .option-one:before, .operation-container .option-container .option-one:after,
+.operation-container .option-container .option-two:before,
+.operation-container .option-container .option-two:after {
+  top: 0;
+  width: 0;
+  height: 100%;
+}
+.operation-container .option-container .option-one:before,
+.operation-container .option-container .option-two:before {
+  left: 0;
+  border: 1px solid black;
+  border-left: 0;
+  border-right: 0;
+}
+.operation-container .option-container .option-one:after,
+.operation-container .option-container .option-two:after {
+  right: 0;
+}
+.operation-container .option-container .option-one:hover:before, .operation-container .option-container .option-one:hover:after,
+.operation-container .option-container .option-two:hover:before,
+.operation-container .option-container .option-two:hover:after {
+  width: 100%;
+}
+.operation-container .randomize-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transform-origin: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+  align-items: start;
+  height: 100%;
+  padding: 3rem 1rem 0 1rem;
+  color: #E1E1E1;
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  overflow-y: scroll;
+  border-top: none;
+  border-bottom: none;
+  border-right: 3px solid black;
+  border-left: 3px solid black;
+  border-radius: 40px;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.operation-container .randomize-container.activated {
+  opacity: 1;
+}
+.operation-container .randomize-container p {
+  pointer-events: none;
+}
+.operation-container .randomize-container .randomize-object-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  align-items: start;
+  height: auto;
+}
+.operation-container .randomize-container .randomize-object-container .item-input-description {
+  color: #868686;
+  width: 100%;
+  text-align: right;
+  margin-bottom: -2rem;
+}
+.operation-container .randomize-container .randomize-object-container .item-accepter {
+  width: 100%;
+  height: 140px;
+  padding: 1rem 1rem;
+  border: none;
+  border-radius: 3px;
+  font-size: 1.8rem;
+  font-family: "Inconsolata", serif;
+  letter-spacing: 0.1rem;
+  text-align: left;
+  box-sizing: border-box;
+  resize: none;
+  overflow-y: scroll;
+}
+.operation-container .randomize-container .randomize-object-container .item-accepter::-moz-placeholder {
+  line-height: 1;
+  text-align: start;
+  font-size: 1.8rem;
+  line-height: 1;
+  letter-spacing: 0.1rem;
+  font-family: "Inconsolata", serif;
+  color: #646464;
+}
+.operation-container .randomize-container .randomize-object-container .item-accepter::placeholder {
+  line-height: 1;
+  text-align: start;
+  font-size: 1.8rem;
+  line-height: 1;
+  letter-spacing: 0.1rem;
+  font-family: "Inconsolata", serif;
+  color: #646464;
+}
+.operation-container .randomize-container .randomize-object-container .item-accepter:focus {
+  outline: none;
+}
+.operation-container .randomize-container .randomize-container-two {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+.operation-container .randomize-container .randomize-container-two .relationship-button-container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+}
+.operation-container .randomize-container .randomize-container-two .relationship-type-container {
+  display: flex;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  font-size: 1.6rem;
+  position: relative;
+  margin: 15px 0 25px 0;
+}
+.operation-container .randomize-container .randomize-container-two .relationship-type-container .floating-label {
+  font-size: 1.6rem;
+  color: #646464;
+  position: absolute;
+  top: 9px;
+  left: 12px;
+  pointer-events: none;
+  transition: all 0.15s ease;
+}
+@media screen and (max-width: 1130px) {
+  .operation-container .randomize-container .randomize-container-two .relationship-type-container .floating-label {
+    font-size: 1.2rem;
+    top: 10px;
+  }
+}
+.operation-container .randomize-container .randomize-container-two .relationship-type-container .relationship-accepter {
+  font-family: "Inconsolata", serif;
+  font-size: 1.6rem;
+  width: 30%;
+  padding: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 2px;
+}
+.operation-container .randomize-container .randomize-container-two .relationship-type-container .relationship-accepter:focus {
+  outline: none;
+}
+.operation-container .randomize-container .randomize-container-two .relationship-type-container .relationship-accepter:not(:-moz-placeholder-shown) ~ .floating-label {
+  top: -15px;
+  bottom: 0px;
+  left: 0px;
+  font-size: 1.2rem;
+  opacity: 1;
+  color: #E1E1E1;
+}
+.operation-container .randomize-container .randomize-container-two .relationship-type-container .relationship-accepter:focus ~ .floating-label, .operation-container .randomize-container .randomize-container-two .relationship-type-container .relationship-accepter:not(:placeholder-shown) ~ .floating-label {
+  top: -15px;
+  bottom: 0px;
+  left: 0px;
+  font-size: 1.2rem;
+  opacity: 1;
+  color: #E1E1E1;
+}
+.operation-container .randomize-container .randomize-container-two .relationship-type-container .relationship-accepter.disabled {
+  pointer-events: none;
+  background-color: #E1E1E1;
+}
+.operation-container .randomize-container .randomize-container-two .relationship-type-container > p {
+  font-size: 1.4rem;
+  width: 60%;
+}
+.operation-container .randomize-container .randomize-container-two.hidden {
+  display: none;
+}
+.operation-container .randomize-container .operation-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.operation-container .randomize-container .operation-button {
+  border: 1px solid white;
+  border-radius: 12px;
+  background-color: black;
+  font-family: "Inconsolata", serif;
+  font-size: 1.8rem;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.35s, color 0.35s, transform 0.2s;
+}
+.operation-container .randomize-container .operation-button:hover {
+  color: black;
+  background-color: white;
+}
+.operation-container .randomize-container .operation-button:active {
+  transform: scale(0.96);
+}
+.operation-container .randomize-container .next-button-container {
+  position: relative;
+}
+.operation-container .randomize-container .next-button-container .next-button {
+  padding: 1rem 5rem;
+}
+.operation-container .randomize-container .next-button-container .next-button.disabled {
+  pointer-events: none;
+}
+.operation-container .randomize-container .next-button-container .next-error {
+  position: absolute;
+  bottom: -18px;
+  color: red;
+  font-size: 1.2rem;
+  opacity: 0;
+  pointer-events: none;
+}
+.operation-container .randomize-container .next-button-container .next-error.error {
+  opacity: 1;
+}
+.operation-container .randomize-container .randomize-button {
+  padding: 1rem 3rem;
+}
+.operation-container .randomize-container .relationship-button {
+  font-size: 1.7rem;
+  padding: 1rem 2rem;
+}
+.operation-container .randomize-container .relationship-button.toggled {
+  color: black;
+  background-color: white;
+}
+.operation-container .randomize-container .chain-button.disabled {
+  pointer-events: none;
+  background-color: #2f2f2f;
+  border: none;
+}
+.operation-container .randomize-container .display-randomization {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  justify-content: space-around;
+  padding: 1rem;
+  width: 100%;
+}
+.operation-container .randomize-container .display-randomization .randomized-header-container {
+  text-align: left;
+}
+.operation-container .randomize-container .display-randomization .main-object-container {
+  display: flex;
+  justify-content: space-around;
+}
+.operation-container .randomize-container .display-randomization .main-object-container .display-objects {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  background: rgb(32, 32, 32);
+  border-left: 3px solid rgb(204, 204, 204);
+  border-radius: 4px;
+}
+.operation-container .randomize-container .display-randomization .main-object-container .display-objects .randomized-item {
+  font-size: 1.6rem;
+}
+.operation-container .randomize-container .display-randomization .main-object-container .secondary-objects.disabled {
+  display: none;
+}
+.operation-container .randomize-container .display-randomization .randomize-message-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0 0 0;
+}
+.operation-container .randomize-container .display-randomization .randomize-message-container .randomize-message {
+  text-align: center;
+  font-size: 1.4rem;
+}
+.operation-container.expanded {
+  height: 76vh;
+}
+
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
+  display: flex;
+  justify-content: end;
+  padding: 1rem 1rem 0 1rem;
+}
+.page-footer .align-footer-left {
+  display: flex;
+  width: 55%;
+  padding: 0 1rem 1rem 1rem;
+  justify-content: space-between;
+}
+.page-footer .align-footer-left .new-randomize-container {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s;
+}
+.page-footer .align-footer-left .new-randomize-container .new-randomize-button {
+  color: white;
+  background-color: black;
+  font-family: "Inconsolata", serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  padding: 1.4rem 1.4rem;
+  border: 1px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.35s ease, background-color 0.35s, color 0.35s;
+}
+.page-footer .align-footer-left .new-randomize-container .new-randomize-button:hover {
+  color: black;
+  background-color: white;
+}
+.page-footer .align-footer-left .new-randomize-container .new-randomize-button:active {
+  color: white;
+  background-color: black;
+}
+.page-footer .align-footer-left .new-randomize-container.activated {
+  opacity: 1;
+  visibility: visible;
+}
+.page-footer .align-footer-left .developer-information-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+}
+.page-footer .align-footer-left .developer-information-container a {
+  font-size: 1.2rem;
+  font-family: "Inconsolata", serif;
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  letter-spacing: 0.1rem;
+  transition: all 0.15s;
+}
+.page-footer .align-footer-left .developer-information-container a:hover {
+  color: #4b4b4b;
+}
+.page-footer .align-footer-left .developer-information-container a:active {
+  color: black;
+}/*# sourceMappingURL=style.css.map */
