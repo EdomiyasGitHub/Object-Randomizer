@@ -283,6 +283,8 @@ body {
   font-size: 1.8rem;
   letter-spacing: 0.2rem;
   overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: #686868 transparent;
   border-top: none;
   border-bottom: none;
   border-right: 3px solid black;
@@ -291,9 +293,30 @@ body {
   background-color: black;
   opacity: 0;
   transition: opacity 0.5s ease;
+  /* * This is to handle Chrome, Edge and Safari  */
+  /* * This is to handle Internet Explorer */
 }
 .operation-container .randomize-container.activated {
   opacity: 1;
+}
+.operation-container .randomize-container .randomize-container::-webkit-scrollbar {
+  width: 5px;
+}
+.operation-container .randomize-container .randomize-container::-webkit-scrollbar-thumb {
+  background-color: #6c757d;
+  border-radius: 4px;
+}
+.operation-container .randomize-container .randomize-container::-webkit-scrollbar-thumb:hover {
+  background-color: #495057;
+}
+.operation-container .randomize-container .randomize-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.operation-container .randomize-container .randomize-container::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+.operation-container .randomize-container .randomize-container {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 .operation-container .randomize-container p {
   pointer-events: none;
